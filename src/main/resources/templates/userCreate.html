@@ -1,0 +1,174 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+-->
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FON ClassRoom Booking System</title>
+    <!-- Google fonts -->
+    <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/css/style-starter.css">
+</head>
+
+<body>
+
+    <!-- header -->
+    <div th:replace="header :: header">...</div>
+    <!-- //header -->
+
+    <!-- inner banner -->
+    <section class="inner-banner py-1">
+        <div class="w3l-breadcrumb py-lg-5">
+            <div class="container pt-4 pb-sm-4">
+                <h4 class="inner-text-title pt-5">Create New User</h4>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a th:href="@{/home}">Home</a></li>
+                    <li class="active"><i class="fas fa-angle-right"></i>Create User</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- //inner banner -->
+
+    <!-- contact block -->
+    <section class="w3l-contact py-5" id="contact">
+        <div class="container py-md-5 py-4">
+            <div class="row contact-block">
+                <div class="col-md-8 login-center">
+                    <form th:action="@{/saveUser}" method="POST" th:object="${newUser}" class="signin-form">
+                        <div class="input-grids">
+                            <ul>
+                                <li class="alert alert-success" role="alert" th:if="${!#strings.isEmpty(successMessage)}"
+                                    th:text="${successMessage}" />
+                                <li class="alert alert-danger" role="alert" th:if="${!#strings.isEmpty(errorMessage)}"
+                                    th:text="${errorMessage}" />
+                            </ul>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <input type="text" th:value="${firstName}" th:field="*{firstName}" id="firstName" placeholder="First Name" required="true" class="contact-input" />
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" th:value="${lastName}" th:field="*{lastName}" id="lastName" placeholder="Last Name" required="true" class="contact-input" />
+                                </div>
+                            </div>
+<!--                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>-->
+                            <input type="text" id="email" th:value="${email}" th:field="*{email}" placeholder="Email" required="true" class="contact-input" />
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <input type="text" th:value="${telephone}" th:field="*{telephone}" id="telephone" placeholder="Mobile Number" required="true" class="contact-input" />
+                                </div>
+                            </div>
+                            <input type="text" th:value="${userName}" th:field="*{userName}" id="userName" placeholder="User Name" required="true"  class="contact-input" />
+<!--                            <input type="password" th:field="*{password}" id="password" placeholder="Password" required="true" class="contact-input" />-->
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <input type="password" th:value="${password}" th:field="*{password}" placeholder="Password" class="contact-input" />
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="password" th:value="${confirmPassword}" th:field="*{confirmPassword}"
+                                           id="confirmPassword" placeholder="Confirm Password" class="contact-input" />
+                                </div>
+                            </div>
+                            <div class="text-start">
+                                <button type="submit" class="btn btn-style btn-style-3">Create New User</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- //contact block -->
+
+    <!-- footer block -->
+    <div th:replace="footer :: footer">...</div>
+    <!-- //footer block -->
+
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () {
+            scrollFunction()
+        };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("movetop").style.display = "block";
+            } else {
+                document.getElementById("movetop").style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+    <!-- //move top -->
+
+    <!-- common jquery plugin -->
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <!-- //common jquery plugin -->
+
+    <!-- theme switch js (light and dark)-->
+    <script src="/js/theme-change.js"></script>
+    <!-- //theme switch js (light and dark)-->
+
+    <!-- MENU-JS -->
+    <script>
+        $(window).on("scroll", function () {
+            var scroll = $(window).scrollTop();
+
+            if (scroll >= 80) {
+                $("#site-header").addClass("nav-fixed");
+            } else {
+                $("#site-header").removeClass("nav-fixed");
+            }
+        });
+
+        //Main navigation Active Class Add Remove
+        $(".navbar-toggler").on("click", function () {
+            $("header").toggleClass("active");
+        });
+        $(document).on("ready", function () {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+            $(window).on("resize", function () {
+                if ($(window).width() > 991) {
+                    $("header").removeClass("active");
+                }
+            });
+        });
+    </script>
+    <!-- //MENU-JS -->
+
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+        $(function () {
+            $('.navbar-toggler').click(function () {
+                $('body').toggleClass('noscroll');
+            })
+        });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+
+    <!-- bootstrap -->
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- //bootstrap -->
+    <!-- //Js scripts -->
+</body>
+
+</html>
